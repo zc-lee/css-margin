@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <pre>
+如果外层div的父元素padding值为0，那么内层div的margin-top或者margin-bottom的值会“转移”给外层div。
+
+原因：盒子没有获得 haslayout  造成 margin-top无效 （haslayout 是Windows Internet Explorer渲染引擎的一个内部组成部分。）
+
+解决办法：
+
+1、在父层div加上：overflow:hidden；
+
+2、把margin-top外边距改成padding-top内边距 ；
+
+3、父元素产生边距重叠的边有不为 0 的 padding 或宽度不为 0 且 style 不为 none 的 border。
+
+    父层div加： padding-top: 1px;
+
+4、让父元素生成一个 block formating context，以下属性可以实现
+    * float: left/right
+    * position: absolute
+    * display: inline-block/table-cell(或其他 table 类型)
+    * overflow: hidden/auto
+
+   父层div加：position: absolute;
+    </pre>
+    <br>
+    <div style="background-color:#81e96c; width:300px; height:300px;overflow: hidden;">
+        <!--父层-->
+        <div style="margin:50px; background-color:#00aaee;width:200px; height:200px"">子层margin:50px;父层overflow: hidden;</div>
+    </div>
+    <br>
+    <div style="background-color:#81e96c; width:300px; height:300px;">
+        <!--父层-->
+        <div style="margin:50px; background-color:#00aaee;width:200px; height:200px"">子层margin:50px;父层无overflow: hidden;</div>
+    </div>
+</body>
+
+</html>
